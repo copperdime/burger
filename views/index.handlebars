@@ -1,44 +1,43 @@
-<h1>Burgers!</h1>
-<h2>Burgers that are not sleepy!</h2>
+<p style = "text-align:center;"><img src ="./assets/img/happyBurger.png" height = "200px" width="240px" alt="MyHappyBurgerGuy"> </p>
+<h1 style = "text-align:center;">Mike's Happy Burgers!</h1>
+<h2>Burgers that are not devoured!</h2>
 <ul>
-  {{#each Burgers}}
-    {{#unless this.sleepy}}
+  {{#each burger}}
+  <!-- If not devoured put burger in this form section -->
+    {{#unless this.devoured}}
       <li>
-        {{this.name}}
+        {{this.burger_name}}
         <form action="/{{this.id}}?_method=PUT" method="POST">
-          <input type="hidden" name="sleepy" value="true">
-          <button type="submit">SLEEP TIME!</button>
+          <input type="hidden" name="devoured" value="true">
+          <button type="submit">EAT'N TIME!</button>
         </form>
-        {{> Burgers/delete-burger}}
+
       </li>
     {{/unless}}
   {{/each}}
 </ul>
-<h2>Burgers that are sleepy!</h2>
+<!-- If have been devoured put burger in this form section -->
+<h2>Burgers that are devoured!</h2>
 <ul>
-  {{#each Burgers}}
-    {{#if this.sleepy}}
+  {{#each burger}}
+    {{#if this.devoured}}
       <li>
-        {{this.name}}
+        {{this.burger_name}}
         <form action="/{{this.id}}?_method=PUT" method="POST">
-          <input type="hidden" name="sleepy" value="false">
-          <button type="submit">WAKE UP!</button>
+          <input type="hidden" name="devoured" value="false">
+          <button type="submit">PUKE!</button>
         </form>
-        {{> Burgers/delete-burger}}
       </li>
     {{/if}}
   {{/each}}
 </ul>
+
 <h2>Add a burger</h2>
 <form class="create-update-form" action="/" method="POST">
+
   <div class="form-group">
-    <label for="ca">burger Name:</label>
-    <input type="text" id="ca" name="name">
-  </div>
-  <div class="form-group">
-    <label for="slee">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
+    <label for="burger">Burger Name:</label>
+    <input type="text" id="burger" name="name">
   </div>
   <button type="submit">Add burger</button>
 </form>
